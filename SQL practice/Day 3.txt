@@ -1,0 +1,456 @@
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+         7 Siva            Tester        5432323 Hyderabad
+         8 Kalyan          Analyzer      5434323 Hyderabad
+
+8 rows selected.
+
+SQL> insert into emp values (9,'Babu','Developer',5435544,'Pune');
+insert into emp values (9,'Babu','Developer',5435544,'Pune')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into emp values (9,'Babu','Developer',5435544,'Pune',9000);
+
+1 row created.
+
+SQL> insert into emp values (10,'Subbu','Tester',5435454,'Pune',8000);
+
+1 row created.
+
+SQL> insert into emp values (11,'Hemanth','Clerk',5432254,'Hyderabad',5000);
+
+1 row created.
+
+SQL> insert into emp values (12,'Sirish','Analyst',8902254,'Banglore',6500);
+
+1 row created.
+
+SQL> insert into emp values (13,'Manish','Developer',8452254,'Pune',7500);
+
+1 row created.
+
+SQL> insert into emp values (14,'Kasif','Clerk',8452548,'Pune',4500);
+
+1 row created.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+         7 Siva            Tester        5432323 Hyderabad
+         8 Kalyan          Analyzer      5434323 Hyderabad
+         9 Babu            Developer     5435544 Pune             9000
+        10 Subbu           Tester        5435454 Pune             8000
+        11 Hemanth         Clerk         5432254 Hyderabad        5000
+        12 Sirish          Analyst       8902254 Banglore         6500
+        13 Manish          Developer     8452254 Pune             7500
+        14 Kasif           Clerk         8452548 Pune             4500
+
+14 rows selected.
+
+SQL> update emp set salary = 10000 where job = 'Developer' and not eno > 5;
+
+2 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+         7 Siva            Tester        5432323 Hyderabad
+         8 Kalyan          Analyzer      5434323 Hyderabad
+         9 Babu            Developer     5435544 Pune             9000
+        10 Subbu           Tester        5435454 Pune             8000
+        11 Hemanth         Clerk         5432254 Hyderabad        5000
+        12 Sirish          Analyst       8902254 Banglore         6500
+        13 Manish          Developer     8452254 Pune             7500
+        14 Kasif           Clerk         8452548 Pune             4500
+
+14 rows selected.
+
+SQL> update emp set salary = 7500 where job = 'Analyst' and eno between 3 and 8;
+
+2 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        7500
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore         7500
+         7 Siva            Tester        5432323 Hyderabad
+         8 Kalyan          Analyzer      5434323 Hyderabad
+         9 Babu            Developer     5435544 Pune             9000
+        10 Subbu           Tester        5435454 Pune             8000
+        11 Hemanth         Clerk         5432254 Hyderabad        5000
+        12 Sirish          Analyst       8902254 Banglore         6500
+        13 Manish          Developer     8452254 Pune             7500
+        14 Kasif           Clerk         8452548 Pune             4500
+
+14 rows selected.
+
+SQL> update emp set salary = 7500 where job = 'Tester' and eno between 4 and 8;
+
+2 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        7500
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         7500
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyzer      5434323 Hyderabad
+         9 Babu            Developer     5435544 Pune             9000
+        10 Subbu           Tester        5435454 Pune             8000
+        11 Hemanth         Clerk         5432254 Hyderabad        5000
+        12 Sirish          Analyst       8902254 Banglore         6500
+        13 Manish          Developer     8452254 Pune             7500
+        14 Kasif           Clerk         8452548 Pune             4500
+
+14 rows selected.
+
+SQL> update emp set salary = 6500 where eno = 4 and eno = 8;
+
+0 rows updated.
+
+SQL> update emp set salary = 6500 where eno = 4 or eno = 8;
+
+2 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        7500
+         4 Narendra        Designer      7854754 Hyderabad        6500
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         7500
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyzer      5434323 Hyderabad        6500
+         9 Babu            Developer     5435544 Pune             9000
+        10 Subbu           Tester        5435454 Pune             8000
+        11 Hemanth         Clerk         5432254 Hyderabad        5000
+        12 Sirish          Analyst       8902254 Banglore         6500
+        13 Manish          Developer     8452254 Pune             7500
+        14 Kasif           Clerk         8452548 Pune             4500
+
+14 rows selected.
+
+SQL> select * from emp order by job;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         6 Mahesh          Analyst       2345154 Banglore         7500
+         3 Ganesh          Analyst       7890754 Hyderabad        7500
+        12 Sirish          Analyst       8902254 Banglore         6500
+         8 Kalyan          Analyzer      5434323 Hyderabad        6500
+        11 Hemanth         Clerk         5432254 Hyderabad        5000
+        14 Kasif           Clerk         8452548 Pune             4500
+         4 Narendra        Designer      7854754 Hyderabad        6500
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         9 Babu            Developer     5435544 Pune             9000
+        13 Manish          Developer     8452254 Pune             7500
+        10 Subbu           Tester        5435454 Pune             8000
+         5 Arun            Tester        2354754 Banglore         7500
+         7 Siva            Tester        5432323 Hyderabad        7500
+
+14 rows selected.
+
+SQL> select * from emp order by job desc;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         7 Siva            Tester        5432323 Hyderabad        7500
+        10 Subbu           Tester        5435454 Pune             8000
+         5 Arun            Tester        2354754 Banglore         7500
+         9 Babu            Developer     5435544 Pune             9000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+        13 Manish          Developer     8452254 Pune             7500
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         4 Narendra        Designer      7854754 Hyderabad        6500
+        11 Hemanth         Clerk         5432254 Hyderabad        5000
+        14 Kasif           Clerk         8452548 Pune             4500
+         8 Kalyan          Analyzer      5434323 Hyderabad        6500
+         3 Ganesh          Analyst       7890754 Hyderabad        7500
+         6 Mahesh          Analyst       2345154 Banglore         7500
+        12 Sirish          Analyst       8902254 Banglore         6500
+
+14 rows selected.
+
+SQL> select eno,ename,job from emp orderby salary desc;
+select eno,ename,job from emp orderby salary desc
+                                      *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select eno,ename,job from emp order by salary desc;
+
+       ENO ENAME           JOB
+---------- --------------- ----------
+         1 Sreenivas       Developer
+         2 Eeshwar         Developer
+         9 Babu            Developer
+        10 Subbu           Tester
+         6 Mahesh          Analyst
+         5 Arun            Tester
+         3 Ganesh          Analyst
+         7 Siva            Tester
+        13 Manish          Developer
+         4 Narendra        Designer
+        12 Sirish          Analyst
+         8 Kalyan          Analyzer
+        11 Hemanth         Clerk
+        14 Kasif           Clerk
+
+14 rows selected.
+
+SQL> select eno,ename,job,salary from emp order by salary desc;
+
+       ENO ENAME           JOB            SALARY
+---------- --------------- ---------- ----------
+         1 Sreenivas       Developer       10000
+         2 Eeshwar         Developer       10000
+         9 Babu            Developer        9000
+        10 Subbu           Tester           8000
+         6 Mahesh          Analyst          7500
+         5 Arun            Tester           7500
+         3 Ganesh          Analyst          7500
+         7 Siva            Tester           7500
+        13 Manish          Developer        7500
+         4 Narendra        Designer         6500
+        12 Sirish          Analyst          6500
+         8 Kalyan          Analyzer         6500
+        11 Hemanth         Clerk            5000
+        14 Kasif           Clerk            4500
+
+14 rows selected.
+
+SQL> alter table emp
+  2  modify ename varchar2(10);
+
+Table altered.
+
+SQL> desc emp;
+ Name                                                                                                                                                             Null?     Type
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ENO
+      NOT NULL NUMBER
+ ENAME                                                                                                                                                     VARCHAR2(10)
+ JOB                                                                                                                                                       VARCHAR2(10)
+ PH_NO
+      NOT NULL NUMBER
+ LOCATION                                                                                                                                                  VARCHAR2(10)
+ SALARY                                                                                                                                                    NUMBER(10)
+
+SQL> set lines 10 pages 10;
+SQL> desc emp;
+ Name              Null?    Type
+ ----------------- -------- ------------
+ ENO               NOT NULL NUMBER
+ ENAME                      VARCHAR2(10)
+ JOB                        VARCHAR2(10)
+ PH_NO             NOT NULL NUMBER
+ LOCATION                   VARCHAR2(10)
+ SALARY                     NUMBER(10)
+
+SQL> set lines 454 pages 787;
+SQL> select eno,ename,job,salary from emp order by job desc;
+
+       ENO ENAME      JOB            SALARY
+---------- ---------- ---------- ----------
+         7 Siva       Tester           7500
+        10 Subbu      Tester           8000
+         5 Arun       Tester           7500
+         9 Babu       Developer        9000
+         2 Eeshwar    Developer       10000
+        13 Manish     Developer        7500
+         1 Sreenivas  Developer       10000
+         4 Narendra   Designer         6500
+        11 Hemanth    Clerk            5000
+        14 Kasif      Clerk            4500
+         8 Kalyan     Analyzer         6500
+         3 Ganesh     Analyst          7500
+         6 Mahesh     Analyst          7500
+        12 Sirish     Analyst          6500
+
+14 rows selected.
+
+SQL> select eno,ename,job,salary from emp order by salary,ename desc;
+
+       ENO ENAME      JOB            SALARY
+---------- ---------- ---------- ----------
+        14 Kasif      Clerk            4500
+        11 Hemanth    Clerk            5000
+        12 Sirish     Analyst          6500
+         4 Narendra   Designer         6500
+         8 Kalyan     Analyzer         6500
+         7 Siva       Tester           7500
+        13 Manish     Developer        7500
+         6 Mahesh     Analyst          7500
+         3 Ganesh     Analyst          7500
+         5 Arun       Tester           7500
+        10 Subbu      Tester           8000
+         9 Babu       Developer        9000
+         1 Sreenivas  Developer       10000
+         2 Eeshwar    Developer       10000
+
+14 rows selected.
+
+SQL> select eno,ename,job,salary from emp order by salary desc;
+
+       ENO ENAME      JOB            SALARY
+---------- ---------- ---------- ----------
+         1 Sreenivas  Developer       10000
+         2 Eeshwar    Developer       10000
+         9 Babu       Developer        9000
+        10 Subbu      Tester           8000
+         6 Mahesh     Analyst          7500
+         5 Arun       Tester           7500
+         3 Ganesh     Analyst          7500
+         7 Siva       Tester           7500
+        13 Manish     Developer        7500
+         4 Narendra   Designer         6500
+        12 Sirish     Analyst          6500
+         8 Kalyan     Analyzer         6500
+        11 Hemanth    Clerk            5000
+        14 Kasif      Clerk            4500
+
+14 rows selected.
+
+SQL> /* The following SQL statement selects all EMPLOYEES from the "EMP" table, sorted by the "SALARY" and the "EName" column. This means that it orders by SALARY, but if some rows have the same 'SALARY', it orders them by 'ENAME' */
+SQL>
+SQL> select * from emp order by salary,ename;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+        14 Kasif      Clerk         8452548 Pune             4500
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+        12 Sirish     Analyst       8902254 Banglore         6500
+         5 Arun       Tester        2354754 Banglore         7500
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+        13 Manish     Developer     8452254 Pune             7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+        10 Subbu      Tester        5435454 Pune             8000
+         9 Babu       Developer     5435544 Pune             9000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         1 Sreenivas  Developer     4321421 Banglore        10000
+
+14 rows selected.
+
+SQL> select * from emp order by salary,location;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+        14 Kasif      Clerk         8452548 Pune             4500
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+        13 Manish     Developer     8452254 Pune             7500
+        10 Subbu      Tester        5435454 Pune             8000
+         9 Babu       Developer     5435544 Pune             9000
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+
+14 rows selected.
+
+SQL> /* Can update or can change all the column records at a time by using update stmt */
+SQL>
+SQL> update emp set salary = 100 ;
+
+14 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore          100
+         2 Eeshwar    Developer     7890789 Hyderabad         100
+         3 Ganesh     Analyst       7890754 Hyderabad         100
+         4 Narendra   Designer      7854754 Hyderabad         100
+         5 Arun       Tester        2354754 Banglore          100
+         6 Mahesh     Analyst       2345154 Banglore          100
+         7 Siva       Tester        5432323 Hyderabad         100
+         8 Kalyan     Analyzer      5434323 Hyderabad         100
+         9 Babu       Developer     5435544 Pune              100
+        10 Subbu      Tester        5435454 Pune              100
+        11 Hemanth    Clerk         5432254 Hyderabad         100
+        12 Sirish     Analyst       8902254 Banglore          100
+        13 Manish     Developer     8452254 Pune              100
+        14 Kasif      Clerk         8452548 Pune              100
+
+14 rows selected.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from emp;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+
+14 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;

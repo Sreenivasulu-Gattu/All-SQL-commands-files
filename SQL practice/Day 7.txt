@@ -1,0 +1,807 @@
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri Jun 23 22:21:40 2023
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+Last Successful login time: Fri Jun 23 2023 13:37:26 +05:30
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> set pages 232 lines 232 ;
+SQL> select * from tab;
+
+TNAME                                                                                                                            TABTYPE        CLUSTERID
+-------------------------------------------------------------------------------------------------------------------------------- ------------- ----------
+LOGMNR_SESSION_EVOLVE$                                                                                                           TABLE
+LOGMNR_GLOBAL$                                                                                                                   TABLE
+LOGMNR_GT_TAB_INCLUDE$                                                                                                           TABLE
+LOGMNR_GT_USER_INCLUDE$                                                                                                          TABLE
+LOGMNR_GT_XID_INCLUDE$                                                                                                           TABLE
+LOGMNR_PDB_INFO$                                                                                                                 TABLE
+LOGMNR_DID$                                                                                                                      TABLE
+LOGMNR_UID$                                                                                                                      TABLE
+LOGMNRGGC_GTLO                                                                                                                   TABLE
+LOGMNRGGC_GTCS                                                                                                                   TABLE
+LOGMNRC_DBNAME_UID_MAP                                                                                                           TABLE
+LOGMNR_LOG$                                                                                                                      TABLE
+LOGMNR_PROCESSED_LOG$                                                                                                            TABLE
+LOGMNR_SPILL$                                                                                                                    TABLE
+LOGMNR_AGE_SPILL$                                                                                                                TABLE
+LOGMNR_RESTART_CKPT_TXINFO$                                                                                                      TABLE
+LOGMNR_ERROR$                                                                                                                    TABLE
+LOGMNR_RESTART_CKPT$                                                                                                             TABLE
+LOGMNR_FILTER$                                                                                                                   TABLE
+LOGMNR_SESSION_ACTIONS$                                                                                                          TABLE
+LOGMNR_PARAMETER$                                                                                                                TABLE
+LOGMNR_SESSION$                                                                                                                  TABLE
+LOGMNR_PROFILE_TABLE_STATS$                                                                                                      TABLE
+LOGMNR_PROFILE_PLSQL_STATS$                                                                                                      TABLE
+LOGMNRT_MDDL$                                                                                                                    TABLE
+REDO_DB                                                                                                                          TABLE
+REDO_LOG                                                                                                                         TABLE
+ROLLING$CONNECTIONS                                                                                                              TABLE
+ROLLING$DATABASES                                                                                                                TABLE
+ROLLING$DIRECTIVES                                                                                                               TABLE
+ROLLING$EVENTS                                                                                                                   TABLE
+ROLLING$PARAMETERS                                                                                                               TABLE
+ROLLING$PLAN                                                                                                                     TABLE
+ROLLING$STATISTICS                                                                                                               TABLE
+ROLLING$STATUS                                                                                                                   TABLE
+SYSCATALOG                                                                                                                       SYNONYM
+CATALOG                                                                                                                          SYNONYM
+TAB                                                                                                                              SYNONYM
+COL                                                                                                                              SYNONYM
+TABQUOTAS                                                                                                                        SYNONYM
+SYSFILES                                                                                                                         SYNONYM
+PUBLICSYN                                                                                                                        SYNONYM
+MVIEW$_ADV_WORKLOAD                                                                                                              TABLE
+MVIEW$_ADV_BASETABLE                                                                                                             TABLE
+MVIEW$_ADV_SQLDEPEND                                                                                                             TABLE
+MVIEW$_ADV_PRETTY                                                                                                                TABLE
+MVIEW$_ADV_TEMP                                                                                                                  TABLE
+MVIEW$_ADV_FILTER                                                                                                                TABLE
+MVIEW$_ADV_LOG                                                                                                                   TABLE
+MVIEW$_ADV_FILTERINSTANCE                                                                                                        TABLE
+MVIEW$_ADV_LEVEL                                                                                                                 TABLE
+MVIEW$_ADV_ROLLUP                                                                                                                TABLE
+MVIEW$_ADV_AJG                                                                                                                   TABLE
+MVIEW$_ADV_FJG                                                                                                                   TABLE
+MVIEW$_ADV_GC                                                                                                                    TABLE
+MVIEW$_ADV_CLIQUE                                                                                                                TABLE
+MVIEW$_ADV_ELIGIBLE                                                                                                              TABLE
+MVIEW$_ADV_OUTPUT                                                                                                                TABLE
+MVIEW$_ADV_EXCEPTIONS                                                                                                            TABLE
+MVIEW$_ADV_PARAMETERS                                                                                                            TABLE
+MVIEW$_ADV_INFO                                                                                                                  TABLE
+MVIEW$_ADV_JOURNAL                                                                                                               TABLE
+MVIEW$_ADV_PLAN                                                                                                                  TABLE
+MVIEW_WORKLOAD                                                                                                                   VIEW
+MVIEW_FILTER                                                                                                                     VIEW
+MVIEW_LOG                                                                                                                        VIEW
+MVIEW_FILTERINSTANCE                                                                                                             VIEW
+MVIEW_RECOMMENDATIONS                                                                                                            VIEW
+MVIEW_EVALUATIONS                                                                                                                VIEW
+MVIEW_EXCEPTIONS                                                                                                                 VIEW
+OL$                                                                                                                              TABLE
+OL$HINTS                                                                                                                         TABLE
+OL$NODES                                                                                                                         TABLE
+AQ$_QUEUE_TABLES                                                                                                                 TABLE
+AQ$_KEY_SHARD_MAP                                                                                                                TABLE
+AQ$_QUEUES                                                                                                                       TABLE
+AQ$_SCHEDULES                                                                                                                    TABLE
+AQ$_INTERNET_AGENTS                                                                                                              TABLE
+AQ$_INTERNET_AGENT_PRIVS                                                                                                         TABLE
+LOGMNR_DICTSTATE$                                                                                                                TABLE
+LOGMNRC_GTLO                                                                                                                     TABLE
+LOGMNRC_GTCS                                                                                                                     TABLE
+LOGMNRC_SEQ_GG                                                                                                                   TABLE
+LOGMNRC_CON_GG                                                                                                                   TABLE
+LOGMNRC_CONCOL_GG                                                                                                                TABLE
+LOGMNRC_IND_GG                                                                                                                   TABLE
+LOGMNRC_INDCOL_GG                                                                                                                TABLE
+LOGMNRC_SHARD_TS                                                                                                                 TABLE
+LOGMNRC_TSPART                                                                                                                   TABLE
+LOGMNRC_TS                                                                                                                       TABLE
+LOGMNRC_GSII                                                                                                                     TABLE
+LOGMNRC_GSBA                                                                                                                     TABLE
+LOGMNRC_USER                                                                                                                     TABLE
+LOGMNR_SEED$                                                                                                                     TABLE
+LOGMNR_DICTIONARY$                                                                                                               TABLE
+LOGMNR_OBJ$                                                                                                                      TABLE
+LOGMNR_TAB$                                                                                                                      TABLE
+LOGMNR_COL$                                                                                                                      TABLE
+LOGMNR_ATTRCOL$                                                                                                                  TABLE
+LOGMNR_TS$                                                                                                                       TABLE
+LOGMNR_IND$                                                                                                                      TABLE
+LOGMNR_USER$                                                                                                                     TABLE
+LOGMNR_TABPART$                                                                                                                  TABLE
+LOGMNR_TABSUBPART$                                                                                                               TABLE
+LOGMNR_TABCOMPART$                                                                                                               TABLE
+LOGMNR_TYPE$                                                                                                                     TABLE
+LOGMNR_COLTYPE$                                                                                                                  TABLE
+LOGMNR_ATTRIBUTE$                                                                                                                TABLE
+LOGMNR_LOB$                                                                                                                      TABLE
+LOGMNR_CON$                                                                                                                      TABLE
+LOGMNR_CONTAINER$                                                                                                                TABLE
+LOGMNR_CDEF$                                                                                                                     TABLE
+LOGMNR_CCOL$                                                                                                                     TABLE
+LOGMNR_ICOL$                                                                                                                     TABLE
+LOGMNR_LOBFRAG$                                                                                                                  TABLE
+LOGMNR_INDPART$                                                                                                                  TABLE
+LOGMNR_INDSUBPART$                                                                                                               TABLE
+LOGMNR_INDCOMPART$                                                                                                               TABLE
+LOGMNR_LOGMNR_BUILDLOG                                                                                                           TABLE
+LOGMNR_NTAB$                                                                                                                     TABLE
+LOGMNR_OPQTYPE$                                                                                                                  TABLE
+LOGMNR_SUBCOLTYPE$                                                                                                               TABLE
+LOGMNR_KOPM$                                                                                                                     TABLE
+LOGMNR_PROPS$                                                                                                                    TABLE
+LOGMNR_ENC$                                                                                                                      TABLE
+LOGMNR_REFCON$                                                                                                                   TABLE
+LOGMNR_IDNSEQ$                                                                                                                   TABLE
+LOGMNR_PARTOBJ$                                                                                                                  TABLE
+LOGMNRP_CTAS_PART_MAP                                                                                                            TABLE
+LOGMNR_SHARD_TS                                                                                                                  TABLE
+SCHEDULER_PROGRAM_ARGS                                                                                                           VIEW
+SCHEDULER_JOB_ARGS                                                                                                               VIEW
+SCHEDULER_PROGRAM_ARGS_TBL                                                                                                       TABLE
+SCHEDULER_JOB_ARGS_TBL                                                                                                           TABLE
+LOGSTDBY$PARAMETERS                                                                                                              TABLE
+LOGSTDBY$EVENTS                                                                                                                  TABLE
+LOGSTDBY$APPLY_PROGRESS                                                                                                          TABLE
+LOGSTDBY$APPLY_MILESTONE                                                                                                         TABLE
+LOGSTDBY$SCN                                                                                                                     TABLE
+LOGSTDBY$FLASHBACK_SCN                                                                                                           TABLE
+LOGSTDBY$PLSQL                                                                                                                   TABLE
+LOGSTDBY$SKIP_TRANSACTION                                                                                                        TABLE
+LOGSTDBY$SKIP                                                                                                                    TABLE
+LOGSTDBY$SKIP_SUPPORT                                                                                                            TABLE
+LOGSTDBY$HISTORY                                                                                                                 TABLE
+LOGSTDBY$EDS_TABLES                                                                                                              TABLE
+REPL_VALID_COMPAT                                                                                                                TABLE
+REPL_SUPPORT_MATRIX                                                                                                              TABLE
+PRODUCT_PRIVS                                                                                                                    VIEW
+SQLPLUS_PRODUCT_PROFILE                                                                                                          TABLE
+PRODUCT_USER_PROFILE                                                                                                             SYNONYM
+HELP                                                                                                                             TABLE
+EMP                                                                                                                              TABLE
+ORD                                                                                                                              TABLE
+CUS                                                                                                                              TABLE
+VIEW_ORD                                                                                                                         VIEW
+VIEW_CUS                                                                                                                         VIEW
+STD                                                                                                                              TABLE
+CRS                                                                                                                              TABLE
+
+159 rows selected.
+
+SQL> select * from emp;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select ltrim(ename) from emp;
+
+LTRIM(ENAM
+----------
+Sreenivas
+Eeshwar
+Ganesh
+Narendra
+Arun
+Mahesh
+Siva
+Kalyan
+Babu
+Subbu
+Hemanth
+Sirish
+Manish
+Kasif
+Harish
+
+15 rows selected.
+
+SQL> update table emp
+  2  set ename = '  Harish' where eno = 15;
+update table emp
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update emp
+  2  set ename = '  Harish' where eno = 15;
+
+1 row updated.
+
+SQL> select ltrim(ename) from emp;
+
+LTRIM(ENAM
+----------
+Sreenivas
+Eeshwar
+Ganesh
+Narendra
+Arun
+Mahesh
+Siva
+Kalyan
+Babu
+Subbu
+Hemanth
+Sirish
+Manish
+Kasif
+Harish
+
+15 rows selected.
+
+SQL> select trim(' fdsff   fs  fs f  fs   ');
+select trim(' fdsff   fs  fs f  fs   ')
+                                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select trim(' fdsff   fs  fs f  fs   ') from dual;
+
+TRIM('FDSFFFSFSFFS')
+--------------------
+fdsff   fs  fs f  fs
+
+SQL> select rtrim(' fdsff   fs  fs f  fs   ') from dual;
+
+RTRIM('FDSFFFSFSFFS')
+---------------------
+ fdsff   fs  fs f  fs
+
+SQL> select rtrim(' fdsff   fs  fs f  fs   ') from dual;
+
+RTRIM('FDSFFFSFSFFS')
+---------------------
+ fdsff   fs  fs f  fs
+
+SQL> select ltrim(' fdsff   fs  fs f  fs   ') from dual;
+
+LTRIM('FDSFFFSFSFFS')
+-----------------------
+fdsff   fs  fs f  fs
+
+SQL> select upper(ename) from emp;
+
+UPPER(ENAM
+----------
+SREENIVAS
+EESHWAR
+GANESH
+NARENDRA
+ARUN
+MAHESH
+SIVA
+KALYAN
+BABU
+SUBBU
+HEMANTH
+SIRISH
+MANISH
+KASIF
+  HARISH
+
+15 rows selected.
+
+SQL> select lower(ename) from emp;
+
+LOWER(ENAM
+----------
+sreenivas
+eeshwar
+ganesh
+narendra
+arun
+mahesh
+siva
+kalyan
+babu
+subbu
+hemanth
+sirish
+manish
+kasif
+  harish
+
+15 rows selected.
+
+SQL> select reverse(ename) from emp;
+
+REVERSE(EN
+----------
+savineerS
+rawhseE
+hsenaG
+ardneraN
+nurA
+hsehaM
+aviS
+naylaK
+ubaB
+ubbuS
+htnameH
+hsiriS
+hsinaM
+fisaK
+hsiraH
+
+15 rows selected.
+
+SQL> select substring(ename,3,5) from emp;
+select substring(ename,3,5) from emp
+       *
+ERROR at line 1:
+ORA-00904: "SUBSTRING": invalid identifier
+
+
+SQL> select substr(ename,3,5) from emp;
+
+SUBSTR(ENAME,3,5)
+--------------------
+eeniv
+shwar
+nesh
+rendr
+un
+hesh
+va
+lyan
+bu
+bbu
+manth
+rish
+nish
+sif
+Haris
+
+15 rows selected.
+
+SQL> select rpad(ename,15,' *, ') from emp;
+
+RPAD(ENAME,15,'*,')
+------------------------------------------------------------
+Sreenivas *,  *
+Eeshwar *,  *,
+Ganesh *,  *,
+Narendra *,  *,
+Arun *,  *,  *,
+Mahesh *,  *,
+Siva *,  *,  *,
+Kalyan *,  *,
+Babu *,  *,  *,
+Subbu *,  *,  *
+Hemanth *,  *,
+Sirish *,  *,
+Manish *,  *,
+Kasif *,  *,  *
+  Harish *,  *,
+
+15 rows selected.
+
+SQL> select replace( ename ,'S','$') from emp;
+
+REPLACE(EN
+----------
+$reenivas
+Eeshwar
+Ganesh
+Narendra
+Arun
+Mahesh
+$iva
+Kalyan
+Babu
+$ubbu
+Hemanth
+$irish
+Manish
+Kasif
+  Harish
+
+15 rows selected.
+
+SQL> select * from emp;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15   Harish   Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select abs(-12.2) from dual;
+
+ABS(-12.2)
+----------
+      12.2
+
+SQL> select abs(-0) from dual;
+
+   ABS(-0)
+----------
+         0
+
+SQL> select abs(8-(-8)) from dual;
+
+ABS(8-(-8))
+-----------
+         16
+
+SQL> select abs(-8-(-8)) from dual;
+
+ABS(-8-(-8))
+------------
+           0
+
+SQL> select abs(-8-(pow(4,3))) from dual;
+select abs(-8-(pow(4,3))) from dual
+               *
+ERROR at line 1:
+ORA-00904: "POW": invalid identifier
+
+
+SQL> select ceil(15.1) from dual;
+
+CEIL(15.1)
+----------
+        16
+
+SQL> select ceil(15.0) from dual;
+
+CEIL(15.0)
+----------
+        15
+
+SQL> select ceil(15.2) from dual;
+
+CEIL(15.2)
+----------
+        16
+
+SQL> select ceil(15.9) from dual;
+
+CEIL(15.9)
+----------
+        16
+
+SQL> select ceil(-15.9) from dual;
+
+CEIL(-15.9)
+-----------
+        -15
+
+SQL> select abs(exp(5)) from dual;
+
+ABS(EXP(5))
+-----------
+ 148.413159
+
+SQL> select exp(5) from dual;
+
+    EXP(5)
+----------
+148.413159
+
+SQL> select exp(4) from dual;
+
+    EXP(4)
+----------
+  54.59815
+
+SQL> select exp(-4) from dual;
+
+   EXP(-4)
+----------
+.018315639
+
+SQL>  select floor(12.9) from dual;
+
+FLOOR(12.9)
+-----------
+         12
+
+SQL>  select floor(-12.9) from dual;
+
+FLOOR(-12.9)
+------------
+         -13
+
+SQL>  select floor(-12.6) from dual;
+
+FLOOR(-12.6)
+------------
+         -13
+
+SQL>  select floor(-12.1) from dual;
+
+FLOOR(-12.1)
+------------
+         -13
+
+SQL> select log(2,32) from dual;
+
+ LOG(2,32)
+----------
+         5
+
+SQL> select log(2,31) from dual;
+
+ LOG(2,31)
+----------
+4.95419631
+
+SQL> select mod(sal,2) from emp;
+select mod(sal,2) from emp
+           *
+ERROR at line 1:
+ORA-00904: "SAL": invalid identifier
+
+
+SQL> select mod(salary,2) from emp;
+
+MOD(SALARY,2)
+-------------
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+            0
+
+15 rows selected.
+
+SQL> select mod(salary,2000) from emp;
+
+MOD(SALARY,2000)
+----------------
+               0
+               0
+            1500
+             500
+            1500
+            1500
+            1500
+             500
+            1000
+               0
+            1000
+             500
+            1500
+             500
+            1430
+
+15 rows selected.
+
+SQL> select mod(-5,3) from dual;
+
+ MOD(-5,3)
+----------
+        -2
+
+SQL> select pow(-5,3) from dual;
+select pow(-5,3) from dual
+       *
+ERROR at line 1:
+ORA-00904: "POW": invalid identifier
+
+
+SQL> select power(-5,3) from dual;
+
+POWER(-5,3)
+-----------
+       -125
+
+SQL> select power(5,-3) from dual;
+
+POWER(5,-3)
+-----------
+       .008
+
+SQL> select round(15.254,1) from dual;
+
+ROUND(15.254,1)
+---------------
+           15.3
+
+SQL> select round(15.254,2) from dual;
+
+ROUND(15.254,2)
+---------------
+          15.25
+
+SQL> select round(15.244,1) from dual;
+
+ROUND(15.244,1)
+---------------
+           15.2
+
+SQL> select round(-15.244,1) from dual;
+
+ROUND(-15.244,1)
+----------------
+           -15.2
+
+SQL> select round(-15.284,1) from dual;
+
+ROUND(-15.284,1)
+----------------
+           -15.3
+
+SQL> select sqrt(-100) from dual;
+select sqrt(-100) from dual
+            *
+ERROR at line 1:
+ORA-01428: argument '-100' is out of range
+
+
+SQL> select sqrt(100) from dual;
+
+ SQRT(100)
+----------
+        10
+
+SQL> select sqrt(-4) from dual;
+select sqrt(-4) from dual
+            *
+ERROR at line 1:
+ORA-01428: argument '-4' is out of range
+
+
+SQL> select sqrt(6.90) from dual;
+
+SQRT(6.90)
+----------
+2.62678511
+
+SQL> select trunc(6.90) from dual;
+
+TRUNC(6.90)
+-----------
+          6
+
+SQL> select trunc(6.90,1) from dual;
+
+TRUNC(6.90,1)
+-------------
+          6.9
+
+SQL> select trunc(-6.90,1) from dual;
+
+TRUNC(-6.90,1)
+--------------
+          -6.9
+
+SQL> select trunc(6.90,-1) from dual;
+
+TRUNC(6.90,-1)
+--------------
+             0
+
+SQL> select trunc(16.90,-1) from dual;
+
+TRUNC(16.90,-1)
+---------------
+             10
+
+SQL> select trunc(316.90,-1) from dual;
+
+TRUNC(316.90,-1)
+----------------
+             310
+
+SQL> select trunc(316.90,-2) from dual;
+
+TRUNC(316.90,-2)
+----------------
+             300
+
+SQL> select trunc(316.90,2) from dual;
+
+TRUNC(316.90,2)
+---------------
+          316.9
+
+SQL> select current_date() from dual;
+select current_date() from dual
+                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select current_date from dual;
+
+CURRENT_D
+---------
+24-JUN-23
+
+SQL> select sessiontimezone, current_date from dual;
+
+SESSIONTIMEZONE                                                             CURRENT_D
+--------------------------------------------------------------------------- ---------
++05:30                                                                      24-JUN-23
+
+SQL> select sessiontimezone, current_date,current_time from dual;
+select sessiontimezone, current_date,current_time from dual
+                                     *
+ERROR at line 1:
+ORA-00904: "CURRENT_TIME": invalid identifier
+
+
+SQL> set line 290 pages 290;
+SQL> select sessiontimezone, current_date from dual;
+
+SESSIONTIMEZONE                                                             CURRENT_D
+--------------------------------------------------------------------------- ---------
++05:30                                                                      24-JUN-23
+
+SQL> select current_date from dual;
+
+CURRENT_D
+---------
+24-JUN-23
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-YYYY HH24:MI:SS';
+
+Session altered.
+
+SQL> select current_date from dual;
+
+CURRENT_DATE
+--------------------
+24-JUN-2023 17:20:13
+
+SQL> select current_timestamp from dual;
+
+CURRENT_TIMESTAMP
+---------------------------------------------------------------------------
+24-JUN-23 05.23.52.239000 PM +05:30

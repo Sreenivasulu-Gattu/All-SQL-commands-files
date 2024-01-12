@@ -1,0 +1,644 @@
+SQL> show user;
+USER is "SCOTT"
+SQL> select * from all_users ;
+
+USERNAME                          USER_ID CREATED
+------------------------------ ---------- ---------
+BI                                     60 14-JUL-23
+PM                                     59 14-JUL-23
+SH                                     58 14-JUL-23
+IX                                     57 14-JUL-23
+OE                                     56 14-JUL-23
+HR                                     55 14-JUL-23
+SCOTT                                  54 30-AUG-05
+MGMT_VIEW                              53 30-AUG-05
+MDDATA                                 50 30-AUG-05
+SYSMAN                                 51 30-AUG-05
+MDSYS                                  46 30-AUG-05
+SI_INFORMTN_SCHEMA                     45 30-AUG-05
+ORDPLUGINS                             44 30-AUG-05
+ORDSYS                                 43 30-AUG-05
+OLAPSYS                                47 30-AUG-05
+ANONYMOUS                              39 30-AUG-05
+XDB                                    38 30-AUG-05
+CTXSYS                                 36 30-AUG-05
+EXFSYS                                 34 30-AUG-05
+WMSYS                                  25 30-AUG-05
+DBSNMP                                 24 30-AUG-05
+TSMSYS                                 21 30-AUG-05
+DMSYS                                  35 30-AUG-05
+DIP                                    19 30-AUG-05
+OUTLN                                  11 30-AUG-05
+SYSTEM                                  5 30-AUG-05
+SYS                                     0 30-AUG-05
+
+27 rows selected.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+
+SQL> alter user hr identified by Sreenu;
+alter user hr identified by Sreenu
+                            *
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> conn hr/sreenu;
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> conn scott/Sreenu
+Connected.
+SQL> conn hr/Sreenu;
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> conn scott/Sreenu
+Connected.
+SQL> revoke all privileges from hr;
+revoke all privileges from hr
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> alter user hr identified by Sreenu 
+  2  ;
+alter user hr identified by Sreenu
+                            *
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> alter user hr account unlock;
+alter user hr account unlock
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> connect scott as sysdba
+Enter password: ******
+ERROR:
+ORA-01031: insufficient privileges
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> show user
+USER is ""
+SQL> conn scott 
+Enter password: ******
+Connected.
+SQL> show user
+USER is "SCOTT"
+SQL> connect sys as sysdba
+Enter password: ******
+Connected.
+SQL> show user
+USER is "SYS"
+SQL> alter user hr identified by Sreenu account unlock;
+
+User altered.
+
+SQL> show user;
+USER is "SYS"
+SQL> conn scott/Sreenu;
+Connected.
+SQL> 
+SQL> select * from emp ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+
+SQL> grant select on emp to hr;
+
+Grant succeeded.
+
+SQL> grant all privileges to hr ;
+grant all privileges to hr
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> conn hr/Sreenu;
+Connected.
+SQL> 
+SQL> show user
+USER is "HR"
+SQL> select * from emp ;
+select * from emp
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+REGIONS                        TABLE
+COUNTRIES                      TABLE
+LOCATIONS                      TABLE
+DEPARTMENTS                    TABLE
+JOBS                           TABLE
+EMPLOYEES                      TABLE
+JOB_HISTORY                    TABLE
+EMP_DETAILS_VIEW               VIEW
+
+8 rows selected.
+
+SQL> select * from scott.emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> update table 
+  2  set ;
+update table
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update scott.emp 
+  2  set sal = 2000 
+  3  where scott.empno = 7499;
+where scott.empno = 7499
+      *
+ERROR at line 3:
+ORA-00904: "SCOTT"."EMPNO": invalid identifier
+
+
+SQL> grant select ,update on jobs to hr;
+grant select ,update on jobs to hr
+                                *
+ERROR at line 1:
+ORA-01749: you may not GRANT/REVOKE privileges to/from yourself
+
+
+SQL> grant select ,update on jobs to scott;
+
+Grant succeeded.
+
+SQL> conn scott/Sreenu;
+Connected.
+SQL> 
+SQL> select * from hr.emp;
+select * from hr.emp
+                 *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from hr.jobs;
+
+JOB_ID     JOB_TITLE                           MIN_SALARY MAX_SALARY
+---------- ----------------------------------- ---------- ----------
+AD_PRES    President                                20000      40000
+AD_VP      Administration Vice President            15000      30000
+AD_ASST    Administration Assistant                  3000       6000
+FI_MGR     Finance Manager                           8200      16000
+FI_ACCOUNT Accountant                                4200       9000
+AC_MGR     Accounting Manager                        8200      16000
+AC_ACCOUNT Public Accountant                         4200       9000
+SA_MAN     Sales Manager                            10000      20000
+SA_REP     Sales Representative                      6000      12000
+PU_MAN     Purchasing Manager                        8000      15000
+PU_CLERK   Purchasing Clerk                          2500       5500
+ST_MAN     Stock Manager                             5500       8500
+ST_CLERK   Stock Clerk                               2000       5000
+SH_CLERK   Shipping Clerk                            2500       5500
+IT_PROG    Programmer                                4000      10000
+MK_MAN     Marketing Manager                         9000      15000
+MK_REP     Marketing Representative                  4000       9000
+HR_REP     Human Resources Representative            4000       9000
+PR_REP     Public Relations Representative           4500      10500
+
+19 rows selected.
+
+SQL> show user;
+USER is "SCOTT"
+SQL> revoke select on emp from scott;
+revoke select on emp from scott
+                          *
+ERROR at line 1:
+ORA-01749: you may not GRANT/REVOKE privileges to/from yourself
+
+
+SQL> revoke select on emp to hr;
+revoke select on emp to hr
+                     *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> revoke select on emp from hr;
+
+Revoke succeeded.
+
+SQL> select * from hr.jobs;
+
+JOB_ID     JOB_TITLE                           MIN_SALARY MAX_SALARY
+---------- ----------------------------------- ---------- ----------
+AD_PRES    President                                20000      40000
+AD_VP      Administration Vice President            15000      30000
+AD_ASST    Administration Assistant                  3000       6000
+FI_MGR     Finance Manager                           8200      16000
+FI_ACCOUNT Accountant                                4200       9000
+AC_MGR     Accounting Manager                        8200      16000
+AC_ACCOUNT Public Accountant                         4200       9000
+SA_MAN     Sales Manager                            10000      20000
+SA_REP     Sales Representative                      6000      12000
+PU_MAN     Purchasing Manager                        8000      15000
+PU_CLERK   Purchasing Clerk                          2500       5500
+ST_MAN     Stock Manager                             5500       8500
+ST_CLERK   Stock Clerk                               2000       5000
+SH_CLERK   Shipping Clerk                            2500       5500
+IT_PROG    Programmer                                4000      10000
+MK_MAN     Marketing Manager                         9000      15000
+MK_REP     Marketing Representative                  4000       9000
+HR_REP     Human Resources Representative            4000       9000
+PR_REP     Public Relations Representative           4500      10500
+
+19 rows selected.
+
+SQL> 
+SQL> conn hr/Sreenu
+Connected.
+SQL> 
+SQL> select * from scott.emp;
+select * from scott.emp
+                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> revoke all on jobs from scott;
+
+Revoke succeeded.
+
+SQL> select * from scott.emp;
+select * from scott.emp
+                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> conn scott/Sreenu;
+Connected.
+SQL> 
+SQL> select * from hr.jobs;
+select * from hr.jobs
+                 *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create user sree identified by sree;
+create user sree identified by sree
+                               *
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> conn system/Sreenu;
+Connected.
+SQL> 
+SQL> 
+SQL> show user
+USER is "SYSTEM"
+SQL> 
+SQL> create user sree identified by sree;
+
+User created.
+
+SQL> 
+SQL> select * from all_users;
+
+USERNAME                          USER_ID CREATED
+------------------------------ ---------- ---------
+SREE                                   61 14-JUL-23
+BI                                     60 14-JUL-23
+PM                                     59 14-JUL-23
+SH                                     58 14-JUL-23
+IX                                     57 14-JUL-23
+OE                                     56 14-JUL-23
+HR                                     55 14-JUL-23
+SCOTT                                  54 30-AUG-05
+MGMT_VIEW                              53 30-AUG-05
+MDDATA                                 50 30-AUG-05
+SYSMAN                                 51 30-AUG-05
+MDSYS                                  46 30-AUG-05
+SI_INFORMTN_SCHEMA                     45 30-AUG-05
+ORDPLUGINS                             44 30-AUG-05
+ORDSYS                                 43 30-AUG-05
+OLAPSYS                                47 30-AUG-05
+ANONYMOUS                              39 30-AUG-05
+XDB                                    38 30-AUG-05
+CTXSYS                                 36 30-AUG-05
+EXFSYS                                 34 30-AUG-05
+WMSYS                                  25 30-AUG-05
+DBSNMP                                 24 30-AUG-05
+TSMSYS                                 21 30-AUG-05
+DMSYS                                  35 30-AUG-05
+DIP                                    19 30-AUG-05
+OUTLN                                  11 30-AUG-05
+SYSTEM                                  5 30-AUG-05
+SYS                                     0 30-AUG-05
+
+28 rows selected.
+
+SQL> grant conn on sree;
+grant conn on sree
+      *
+ERROR at line 1:
+ORA-00990: missing or invalid privilege
+
+
+SQL> grant conn to sree;
+grant conn to sree
+      *
+ERROR at line 1:
+ORA-01919: role 'CONN' does not exist
+
+
+SQL> grant connect to sree;
+
+Grant succeeded.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+SYSCATALOG                     SYNONYM
+CATALOG                        SYNONYM
+TAB                            SYNONYM
+COL                            SYNONYM
+TABQUOTAS                      SYNONYM
+SYSFILES                       SYNONYM
+PUBLICSYN                      SYNONYM
+MVIEW$_ADV_WORKLOAD            TABLE
+MVIEW$_ADV_BASETABLE           TABLE
+MVIEW$_ADV_SQLDEPEND           TABLE
+MVIEW$_ADV_PRETTY              TABLE
+MVIEW$_ADV_TEMP                TABLE
+MVIEW$_ADV_FILTER              TABLE
+MVIEW$_ADV_LOG                 TABLE
+MVIEW$_ADV_FILTERINSTANCE      TABLE
+MVIEW$_ADV_LEVEL               TABLE
+MVIEW$_ADV_ROLLUP              TABLE
+MVIEW$_ADV_AJG                 TABLE
+MVIEW$_ADV_FJG                 TABLE
+MVIEW$_ADV_GC                  TABLE
+MVIEW$_ADV_CLIQUE              TABLE
+MVIEW$_ADV_ELIGIBLE            TABLE
+MVIEW$_ADV_OUTPUT              TABLE
+MVIEW$_ADV_EXCEPTIONS          TABLE
+MVIEW$_ADV_PARAMETERS          TABLE
+MVIEW$_ADV_INFO                TABLE
+MVIEW$_ADV_JOURNAL             TABLE
+MVIEW$_ADV_PLAN                TABLE
+MVIEW_WORKLOAD                 VIEW
+MVIEW_FILTER                   VIEW
+MVIEW_LOG                      VIEW
+MVIEW_FILTERINSTANCE           VIEW
+MVIEW_RECOMMENDATIONS          VIEW
+MVIEW_EVALUATIONS              VIEW
+MVIEW_EXCEPTIONS               VIEW
+AQ$_QUEUE_TABLES               TABLE
+AQ$_QUEUES                     TABLE
+AQ$_SCHEDULES                  TABLE
+AQ$_INTERNET_AGENTS            TABLE
+AQ$_INTERNET_AGENT_PRIVS       TABLE
+DEF$_AQCALL                    TABLE
+DEF$_AQERROR                   TABLE
+AQ$_DEF$_AQCALL_F              VIEW
+AQ$DEF$_AQCALL                 VIEW
+DEF$_ERROR                     TABLE
+AQ$_DEF$_AQERROR_F             VIEW
+AQ$DEF$_AQERROR                VIEW
+DEF$_DESTINATION               TABLE
+DEF$_CALLDEST                  TABLE
+DEF$_DEFAULTDEST               TABLE
+DEF$_LOB                       TABLE
+DEF$_TEMP$LOB                  TABLE
+DEF$_PROPAGATOR                TABLE
+DEF$_ORIGIN                    TABLE
+DEF$_PUSHED_TRANSACTIONS       TABLE
+OL$                            TABLE
+OL$HINTS                       TABLE
+OL$NODES                       TABLE
+LOGMNR_SESSION_EVOLVE$         TABLE
+LOGMNR_HEADER1$                TABLE
+LOGMNR_HEADER2$                TABLE
+LOGMNR_UID$                    TABLE
+LOGMNRC_DBNAME_UID_MAP         TABLE
+LOGMNR_DICTSTATE$              TABLE
+LOGMNR_DICTIONARY$             TABLE
+LOGMNR_OBJ$                    TABLE
+LOGMNR_USER$                   TABLE
+LOGMNRC_GTLO                   TABLE
+LOGMNRC_GTCS                   TABLE
+LOGMNRC_GSII                   TABLE
+LOGMNR_TAB$                    TABLE
+LOGMNR_COL$                    TABLE
+LOGMNR_ATTRCOL$                TABLE
+LOGMNR_TS$                     TABLE
+LOGMNR_IND$                    TABLE
+LOGMNR_TABPART$                TABLE
+LOGMNR_TABSUBPART$             TABLE
+LOGMNR_TABCOMPART$             TABLE
+LOGMNR_TYPE$                   TABLE
+LOGMNR_COLTYPE$                TABLE
+LOGMNR_ATTRIBUTE$              TABLE
+LOGMNR_LOB$                    TABLE
+LOGMNR_CDEF$                   TABLE
+LOGMNR_CCOL$                   TABLE
+LOGMNR_ICOL$                   TABLE
+LOGMNR_LOBFRAG$                TABLE
+LOGMNR_INDPART$                TABLE
+LOGMNR_INDSUBPART$             TABLE
+LOGMNR_INDCOMPART$             TABLE
+LOGMNRP_CTAS_PART_MAP          TABLE
+LOGMNRT_MDDL$                  TABLE
+LOGMNR_LOG$                    TABLE
+LOGMNR_PROCESSED_LOG$          TABLE
+LOGMNR_SPILL$                  TABLE
+LOGMNR_AGE_SPILL$              TABLE
+LOGMNR_RESTART_CKPT_TXINFO$    TABLE
+LOGMNR_ERROR$                  TABLE
+LOGMNR_RESTART_CKPT$           TABLE
+LOGMNR_FILTER$                 TABLE
+LOGMNR_PARAMETER$              TABLE
+LOGMNR_SESSION$                TABLE
+LOGSTDBY$PARAMETERS            TABLE
+LOGSTDBY$EVENTS                TABLE
+LOGSTDBY$APPLY_PROGRESS        TABLE
+LOGSTDBY$APPLY_MILESTONE       TABLE
+LOGSTDBY$SCN                   TABLE
+LOGSTDBY$PLSQL                 TABLE
+LOGSTDBY$SKIP_TRANSACTION      TABLE
+LOGSTDBY$SKIP                  TABLE
+LOGSTDBY$SKIP_SUPPORT          TABLE
+LOGSTDBY$HISTORY               TABLE
+REPCAT$_REPCAT                 TABLE
+REPCAT$_FLAVORS                TABLE
+REPCAT$_REPSCHEMA              TABLE
+REPCAT$_SNAPGROUP              TABLE
+REPCAT$_REPOBJECT              TABLE
+REPCAT$_REPCOLUMN              TABLE
+REPCAT$_KEY_COLUMNS            TABLE
+REPCAT$_GENERATED              TABLE
+REPCAT$_REPPROP                TABLE
+REPCAT$_REPCATLOG              TABLE
+REPCAT$_DDL                    TABLE
+REPCAT$_REPGROUP_PRIVS         TABLE
+REPCAT$_PRIORITY_GROUP         TABLE
+REPCAT$_PRIORITY               TABLE
+REPCAT$_COLUMN_GROUP           TABLE
+REPCAT$_GROUPED_COLUMN         TABLE
+REPCAT$_CONFLICT               TABLE
+REPCAT$_RESOLUTION_METHOD      TABLE
+REPCAT$_RESOLUTION             TABLE
+REPCAT$_RESOLUTION_STATISTICS  TABLE
+REPCAT$_RESOL_STATS_CONTROL    TABLE
+REPCAT$_PARAMETER_COLUMN       TABLE
+REPCAT$_AUDIT_ATTRIBUTE        TABLE
+REPCAT$_AUDIT_COLUMN           TABLE
+REPCAT$_FLAVOR_OBJECTS         TABLE
+REPCAT$_TEMPLATE_STATUS        TABLE
+REPCAT$_TEMPLATE_TYPES         TABLE
+REPCAT$_REFRESH_TEMPLATES      TABLE
+REPCAT$_USER_AUTHORIZATIONS    TABLE
+REPCAT$_OBJECT_TYPES           TABLE
+REPCAT$_TEMPLATE_REFGROUPS     TABLE
+REPCAT$_TEMPLATE_OBJECTS       TABLE
+REPCAT$_TEMPLATE_PARMS         TABLE
+REPCAT$_OBJECT_PARMS           TABLE
+REPCAT$_USER_PARM_VALUES       TABLE
+REPCAT$_TEMPLATE_SITES         TABLE
+REPCAT$_SITE_OBJECTS           TABLE
+REPCAT$_RUNTIME_PARMS          TABLE
+REPCAT$_TEMPLATE_TARGETS       TABLE
+REPCAT$_EXCEPTIONS             TABLE
+REPCAT$_INSTANTIATION_DDL      TABLE
+REPCAT$_EXTENSION              TABLE
+REPCAT$_SITES_NEW              TABLE
+SQLPLUS_PRODUCT_PROFILE        TABLE
+PRODUCT_PRIVS                  VIEW
+PRODUCT_USER_PROFILE           SYNONYM
+HELP                           TABLE
+MVIEW$_ADV_INDEX               TABLE
+MVIEW$_ADV_PARTITION           TABLE
+MVIEW$_ADV_OWB                 TABLE
+
+161 rows selected.
+
+SQL> show user;
+USER is "SYSTEM"
+SQL> 
+SQL> conn sree/sree
+Connected.
+SQL> 
+SQL> select * from tab;
+
+no rows selected
+
+SQL> create table emp (hello varchar2(20));
+create table emp (hello varchar2(20))
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> conn system/Sreenu
+Connected.
+SQL> 
+SQL> 
+SQL> show user ;
+USER is "SYSTEM"
+SQL> 
+SQL> grant all privileges to sree;
+
+Grant succeeded.
+
+SQL> 
+SQL> conn sree/sree;
+Connected.
+SQL> 
+SQL> 
+SQL> show user;
+USER is "SREE"
+SQL> 
+SQL> create table hello (hid number(3),hname varchar2(20));
+
+Table created.
+
+SQL> insert into hello values(1,'ha');
+
+1 row created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+HELLO                          TABLE
+
+SQL> select * from hello;
+
+       HID HNAME
+---------- --------------------
+         1 ha

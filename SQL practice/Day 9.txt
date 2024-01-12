@@ -1,0 +1,278 @@
+
+SQL> set pages 232 lines 232;
+SQL> select * from emp where empno = 
+  2  (select mgr from emp where ename = 'SCOTT');
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+
+SQL> select * from emp where mgr = (select mgr from emp where ename = 'SCOTT');
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+
+SQL> select * from emp;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7890 FDSA
+      7369 SMITH                     CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD                      SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN                    SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    20
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER                    SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS                     CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES                     CLERK           7698 03-DEC-81        950                    30
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER                    CLERK           7782 23-JAN-82       1300                    10
+
+15 rows selected.
+
+SQL> select * from emp where empno = (select mgr from emp where ename = 'SCOTT');
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+
+SQL> select * from emp where sal > (select avg(sal) from emp where deptno = 20);
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    20
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    10
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+
+6 rows selected.
+
+SQL> select * from emp where sal > (select avg(sal) from emp ) and deptno = 20;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+
+SQL> select * from emp where deptno = (select deptno from dept where dname in ('SALES','ACCOUNTING'));
+select * from emp where deptno = (select deptno from dept where dname in ('SALES','ACCOUNTING'))
+                                  *
+ERROR at line 1:
+ORA-01427: single-row subquery returns more than one row
+
+
+SQL> select * from emp where deptno in (select deptno from dept where dname in ('SALES','ACCOUNTING'));
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD                      SALESMAN        7698 22-FEB-81       1250        500         30
+      7654 MARTIN                    SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER                    SALESMAN        7698 08-SEP-81       1500          0         30
+      7900 JAMES                     CLERK           7698 03-DEC-81        950                    30
+      7934 MILLER                    CLERK           7782 23-JAN-82       1300                    10
+
+9 rows selected.
+
+
+
+
+
+
+
+
+
+
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Mon Jul 3 15:00:59 2023
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Enter password: ******
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.1.0 - Production
+With the Partitioning, OLAP and Data Mining options
+
+SQL> set pages 232 lines 232 ;
+SQL> select * from emp ;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7890 FDSA
+      7369 SMITH                     CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD                      SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN                    SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    20
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER                    SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS                     CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES                     CLERK           7698 03-DEC-81        950                    30
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER                    CLERK           7782 23-JAN-82       1300                    10
+
+15 rows selected.
+
+SQL> select ename 
+  2  from emp 
+  3  where ename > 'C';
+
+ENAME
+-------------------------
+FDSA
+SMITH
+WARD
+JONES
+MARTIN
+CLARK
+SCOTT
+KING
+TURNER
+JAMES
+FORD
+MILLER
+
+12 rows selected.
+
+SQL>  select ename
+  2   from emp 
+  3   where ename <'C';
+
+ENAME
+-------------------------
+ALLEN
+BLAKE
+ADAMS
+
+SQL> select ename,deptno 
+  2  from emp 
+  3  where deptno in (10,20);
+
+ENAME                         DEPTNO
+------------------------- ----------
+SMITH                             20
+JONES                             20
+CLARK                             10
+SCOTT                             20
+KING                              10
+ADAMS                             20
+FORD                              20
+MILLER                            10
+
+8 rows selected.
+
+SQL> select * from emp 
+  2  where ename in ('C','A');
+
+no rows selected
+
+SQL> select * from emp 
+  2  where ename like 'A%' or ename like 'C%';
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7876 ADAMS                     CLERK           7788 23-MAY-87       1100                    20
+
+SQL> select * from emp 
+  2  where sal between 1500 and 2000;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7844 TURNER                    SALESMAN        7698 08-SEP-81       1500          0         30
+
+SQL> select * from emp 
+  2  where ename between like 'A%' and 'S%';
+where ename between like 'A%' and 'S%'
+                    *
+ERROR at line 2:
+ORA-00936: missing expression
+
+
+SQL> select * from emp
+  2  where ename between 'A' and 'S';
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7890 FDSA
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN                    SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    10
+      7876 ADAMS                     CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES                     CLERK           7698 03-DEC-81        950                    30
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER                    CLERK           7782 23-JAN-82       1300                    10
+
+11 rows selected.
+
+SQL>  select * from emp
+  2   where ename between 'A' and 'S' order by ename;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7876 ADAMS                     CLERK           7788 23-MAY-87       1100                    20
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7890 FDSA
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+      7900 JAMES                     CLERK           7698 03-DEC-81        950                    30
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    10
+      7654 MARTIN                    SALESMAN        7698 28-SEP-81       1250       1400         30
+      7934 MILLER                    CLERK           7782 23-JAN-82       1300                    10
+
+11 rows selected.
+
+SQL> select * from emp 
+  2  where sal > 2000 and deptno >10;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+
+SQL>  select * from emp 
+  2   where sal > 2000 or deptno > 10;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH                     CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD                      SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN                    SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    20
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER                    SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS                     CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES                     CLERK           7698 03-DEC-81        950                    30
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    20
+
+13 rows selected.
+

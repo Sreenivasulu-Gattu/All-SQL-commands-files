@@ -1,0 +1,256 @@
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+
+SQL> create table haha(eno number(10) primary key, ename varchar2(20) not null);
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+HAHA                           TABLE
+
+SQL> show recyclebin;
+SQL> drop table haha;
+
+Table dropped.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+HAHA             BIN$slttBKQNT0euuI0HjXKu4w==$0 TABLE        2023-06-23:13:18:23
+SQL> create table hahaa (eno number, ename varchar2(20));
+
+Table created.
+
+SQL> drop table hahaa;
+
+Table dropped.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+HAHA             BIN$slttBKQNT0euuI0HjXKu4w==$0 TABLE        2023-06-23:13:18:23
+HAHAA            BIN$IFA84gqgR5eB70z0i4ZqxQ==$0 TABLE        2023-06-23:13:19:21
+SQL> flashback table haha to before to drop;
+flashback table haha to before to drop
+                        *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> 
+SQL> flashback table haha to before drop ;
+
+Flashback complete.
+
+SQL> 
+SQL> 
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BIN$IFA84gqgR5eB70z0i4ZqxQ==$0 TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+HAHA                           TABLE
+
+6 rows selected.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+HAHAA            BIN$IFA84gqgR5eB70z0i4ZqxQ==$0 TABLE        2023-06-23:13:19:21
+SQL> 
+SQL> 
+SQL> flashback table hahaa to before drop;
+
+Flashback complete.
+
+SQL> 
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+HAHA                           TABLE
+HAHAA                          TABLE
+
+6 rows selected.
+
+SQL> 
+SQL> 
+SQL> show recyclebin;
+SQL> drop table haha ;
+
+Table dropped.
+
+SQL> drop table hahaa;
+
+Table dropped.
+
+SQL> show recycle bin;
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+HAHA             BIN$njYammX0SnCR5AnlTAfFww==$0 TABLE        2023-06-23:13:23:24
+HAHAA            BIN$yqs8qB/xRRKMQ9I1xzocbg==$0 TABLE        2023-06-23:13:23:30
+SQL> 
+SQL> 
+SQL> purge table haha;
+
+Table purged.
+
+SQL> 
+SQL> 
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+HAHAA            BIN$yqs8qB/xRRKMQ9I1xzocbg==$0 TABLE        2023-06-23:13:23:30
+SQL> 
+SQL> purge recyclebin;
+
+Recyclebin purged.
+
+SQL> 
+SQL> 
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+
+SQL> create table ha(eno number,ename varchar2(20));
+
+Table created.
+
+SQL> 
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+HA                             TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+
+SQL> show recylebin;
+SP2-0158: unknown SHOW option "recylebin"
+SQL> show recyclebin;
+SQL> 
+SQL> create table haa(eno number,ename varchar2(10));
+
+Table created.
+
+SQL> 
+SQL> create table hha(eno number, ename varchar2(10));
+
+Table created.
+
+SQL> 
+SQL> select * from emp;
+
+     EMPNO ENAME                     JOB              MGR HIREDATE         SAL       COMM     DEPTN
+---------- ------------------------- --------- ---------- --------- ---------- ---------- ---------
+      7890 FDSA
+      7369 SMITH                     CLERK           7902 17-DEC-80        800                    2
+      7499 ALLEN                     SALESMAN        7698 20-FEB-81       1600        300         3
+      7521 WARD                      SALESMAN        7698 22-FEB-81       1250        500         3
+      7566 JONES                     MANAGER         7839 02-APR-81       2975                    2
+      7654 MARTIN                    SALESMAN        7698 28-SEP-81       1250       1400         3
+      7698 BLAKE                     MANAGER         7839 01-MAY-81       2850                    3
+      7782 CLARK                     MANAGER         7839 09-JUN-81       2450                    1
+      7788 SCOTT                     ANALYST         7566 19-APR-87       3000                    2
+      7839 KING                      PRESIDENT            17-NOV-81       5000                    1
+      7844 TURNER                    SALESMAN        7698 08-SEP-81       1500          0         3
+      7876 ADAMS                     CLERK           7788 23-MAY-87       1100                    2
+      7900 JAMES                     CLERK           7698 03-DEC-81        950                    3
+      7902 FORD                      ANALYST         7566 03-DEC-81       3000                    2
+      7934 MILLER                    CLERK           7782 23-JAN-82       1300                    1
+
+15 rows selected.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+HA                             TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+HAA                            TABLE
+HHA                            TABLE
+
+7 rows selected.
+
+SQL> drop table haa;
+
+Table dropped.
+
+SQL> drop table hha;
+
+Table dropped.
+
+SQL> flashback table hha to before drop;
+
+Flashback complete.
+
+SQL> flashback table hha to before drop;
+flashback table hha to before drop
+*
+ERROR at line 1:
+ORA-38305: object not in RECYCLE BIN
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPT                           TABLE
+EMP                            TABLE
+HA                             TABLE
+BONUS                          TABLE
+SALGRADE                       TABLE
+HHA                            TABLE
+BIN$OIuShe78SfCpJ9sVn/6CuQ==$0 TABLE
+
+7 rows selected.
+
+SQL> drop table ha;
+
+Table dropped.
+
+SQL> drop table hha;
+
+Table dropped.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME
+---------------- ------------------------------ ------------ -------------------
+HA               BIN$/xZLCUYYTfCBlLfWi/YpbQ==$0 TABLE        2023-06-23:13:29:46
+HAA              BIN$OIuShe78SfCpJ9sVn/6CuQ==$0 TABLE        2023-06-23:13:28:20
+HHA              BIN$ngvgucicQzORlTuwksQY8A==$0 TABLE        2023-06-23:13:29:52
+SQL> purge recyclebin;
+
+Recyclebin purged.

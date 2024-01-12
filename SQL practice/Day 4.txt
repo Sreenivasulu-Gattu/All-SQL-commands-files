@@ -1,0 +1,381 @@
+
+SQL> select * from emp
+  2  fetch first 4 rows only;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+
+SQL> select * from emp
+  2  fetch first 10 rows only
+  3  order by salary;
+order by salary
+*
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp
+  2  fetch first 10 rows only where salary > 1000;
+fetch first 10 rows only where salary > 1000
+                         *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp
+  2  fetch first 7 rows only;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+
+7 rows selected.
+
+SQL> select * from limit 5;
+select * from limit 5
+                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp
+  2  where location = 'Pune'
+  3  limit 2;
+limit 2
+*
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp
+  2  fetch first 5 rows only
+  3  where salary > 4000;
+where salary > 4000
+*
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp
+  2  where salary > 4000
+  3  fetch first 5 rows only;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+
+SQL> select * from emp
+  2  where salary between 7500 and 5500
+  3  fetch first 6 rows only;
+
+no rows selected
+
+SQL> select * from emp
+  2  where salary between 6500 and 7500
+  3  fetch first 4 rows only;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+
+SQL> /* The SQL MIN() and MAX() Functions
+SQL> The MIN() function returns the smallest value of the selected column.
+SQL>
+SQL> The MAX() function returns the largest value of the selected column.*/
+SQL>
+SQL> select min(salary) from emp;
+
+MIN(SALARY)
+-----------
+       4500
+
+SQL> select * from emp
+  2  where salary in min(salary);
+where salary in min(salary)
+                *
+ERROR at line 2:
+ORA-00934: group function is not allowed here
+
+
+SQL> select * from emp
+  2  ;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select * from emp
+  2  where salary = min(salary);
+where salary = min(salary)
+               *
+ERROR at line 2:
+ORA-00934: group function is not allowed here
+
+
+SQL> select min(ph_no) from emp;
+
+MIN(PH_NO)
+----------
+   2345154
+
+SQL> select ename,salary,min(ph_no) from emp;
+select ename,salary,min(ph_no) from emp
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function
+
+
+SQL> select min(salary),ename from emp;
+select min(salary),ename from emp
+                   *
+ERROR at line 1:
+ORA-00937: not a single-group group function
+
+
+SQL> select * from emp
+  2  where salary = (min(salary));
+where salary = (min(salary))
+                *
+ERROR at line 2:
+ORA-00934: group function is not allowed here
+
+
+SQL> select * from emp
+  2  ;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> SQL COUNT(), AVG() and SUM() Functions
+SP2-0734: unknown command beginning "SQL COUNT(..." - rest of line ignored.
+SQL>
+SQL> select count(ename) from emp;
+
+COUNT(ENAME)
+------------
+          15
+
+SQL> select count(ename)
+  2  from emp
+  3  where location = 'Banglore';
+
+COUNT(ENAME)
+------------
+           5
+
+SQL> select avg(salary)
+  2  from emp
+  3  ;
+
+AVG(SALARY)
+-----------
+       7262
+
+SQL> select avg(salary)
+  2  from emp
+  3  where job = 'Developer';
+
+AVG(SALARY)
+-----------
+       9125
+
+SQL> select * from emp
+  2  where job = 'Developer';
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         9 Babu       Developer     5435544 Pune             9000
+        13 Manish     Developer     8452254 Pune             7500
+
+SQL> select count(ename) from emp where salary between 7000 and 9000;
+
+COUNT(ENAME)
+------------
+           7
+
+SQL> select count(ename) Total_emp_at_medium_salary from emp where salary between 7000 and 9000;
+
+TOTAL_EMP_AT_MEDIUM_SALARY
+--------------------------
+                         7
+
+SQL> select avg(salary) as Sal_avg from emp;
+
+   SAL_AVG
+----------
+      7262
+
+SQL> select count(*) from emp;
+
+  COUNT(*)
+----------
+        15
+
+SQL> /********************************** LIKE OPERATOR **************************************/
+SQL>
+SQL> select * from emp;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select * from emp where job like 'A%';
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+        12 Sirish     Analyst       8902254 Banglore         6500
+
+SQL> select * from emp where job like '%a%';
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+        12 Sirish     Analyst       8902254 Banglore         6500
+
+SQL> select * from emp where job like '%e%';
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+12 rows selected.
+
+SQL> select * from emp where job like '%e%' and salary between 6000 and 9000;
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        13 Manish     Developer     8452254 Pune             7500
+
+7 rows selected.
+
+SQL> select * from emp where ph_no like '54%';
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+
+SQL> select * from emp where ph_no like '_54%';
+
+no rows selected
+
+SQL> select * from emp where ph_no like '_4%';
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+
+7 rows selected.
+
+SQL> select * from emp where ph_no like '__3%';
+
+       ENO ENAME      JOB             PH_NO LOCATION       SALARY
+---------- ---------- ---------- ---------- ---------- ----------
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+
+SQL>commit;
+commited
+SQL>

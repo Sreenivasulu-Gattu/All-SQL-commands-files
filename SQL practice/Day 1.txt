@@ -1,0 +1,874 @@
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri Jun 2 17:29:28 2023
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+Last Successful login time: Fri Jun 02 2023 17:07:55 +05:30
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENAME                                              VARCHAR2(10)
+
+SQL> alter emp add eno number primary key;
+alter emp add eno number primary key
+      *
+ERROR at line 1:
+ORA-00940: invalid ALTER command
+
+
+SQL> alter table emp add eno number primary key;
+
+Table altered.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENAME                                              VARCHAR2(10)
+ ENO                                       NOT NULL NUMBER
+
+SQL> alter table emp
+  2  drop column ename;
+
+Table altered.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+
+SQL> alter table emp
+  2  add ename varchar2(20);
+
+Table altered.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(20)
+
+SQL> alter table emp
+  2  add job varchar2(10), dept varchar2(15),Ph_no number;
+add job varchar2(10), dept varchar2(15),Ph_no number
+                    *
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table emp
+  2  add (job varchar2(10),dept varchar2(15),Ph_no number);
+
+Table altered.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(20)
+ JOB                                                VARCHAR2(10)
+ DEPT                                               VARCHAR2(15)
+ PH_NO                                              NUMBER
+
+SQL> spool "D:\SQL practice\creating table and inserting.txt"
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(20)
+ JOB                                                VARCHAR2(10)
+ DEPT                                               VARCHAR2(15)
+ PH_NO                                              NUMBER
+
+SQL> select * from emp;
+
+no rows selected
+
+SQL> alter table emp
+  2  drop column dept;
+
+Table altered.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(20)
+ JOB                                                VARCHAR2(10)
+ PH_NO                                              NUMBER
+
+SQL> insert into emp values(01,"Sreenivas","Developer",8333343213);
+insert into emp values(01,"Sreenivas","Developer",8333343213)
+                                      *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into emp values (01,'Sreenivas');
+insert into emp values (01,'Sreenivas')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into emp values (01,'Sreenivas','Developer',4321421);
+
+1 row created.
+
+SQL> insert into emp values (02,'Eeshwar','Developer',7890789);
+
+1 row created.
+
+SQL> select * from emp;
+
+       ENO ENAME                JOB             PH_NO
+---------- -------------------- ---------- ----------
+         1 Sreenivas            Developer     4321421
+         2 Eeshwar              Developer     7890789
+
+SQL> alter table emp
+  2  modify ename varchar2(15);
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(15)
+ JOB                                                VARCHAR2(10)
+ PH_NO                                              NUMBER
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO
+---------- --------------- ---------- ----------
+         1 Sreenivas       Developer     4321421
+         2 Eeshwar         Developer     7890789
+
+SQL> alter table emp
+  2  modify ph_no number not null;
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(15)
+ JOB                                                VARCHAR2(10)
+ PH_NO                                     NOT NULL NUMBER
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
+SQL>  spool "D:\SQL practice\creating table and inserting.txt"
+SQL> insert into emp values (02,'Ganesh','Analyst',7890754);
+insert into emp values (02,'Ganesh','Analyst',7890754)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C008314) violated
+
+
+SQL> insert into emp values (03,'Ganesh','Analyst',7890754);
+
+1 row created.
+
+SQL> insert into emp values (04,'Narendra','Designer',7854754);
+
+1 row created.
+
+SQL> insert into emp values (05,'Arun','Tester',2354754);
+
+1 row created.
+
+SQL> insert into emp values (06,'Mahesh','Analyst',2345154);
+
+1 row created.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO
+---------- --------------- ---------- ----------
+         1 Sreenivas       Developer     4321421
+         2 Eeshwar         Developer     7890789
+         3 Ganesh          Analyst       7890754
+         4 Narendra        Designer      7854754
+         5 Arun            Tester        2354754
+         6 Mahesh          Analyst       2345154
+
+6 rows selected.
+
+SQL> select job designation from emp;
+
+DESIGNATIO
+----------
+Developer
+Developer
+Analyst
+Designer
+Tester
+Analyst
+
+6 rows selected.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO
+---------- --------------- ---------- ----------
+         1 Sreenivas       Developer     4321421
+         2 Eeshwar         Developer     7890789
+         3 Ganesh          Analyst       7890754
+         4 Narendra        Designer      7854754
+         5 Arun            Tester        2354754
+         6 Mahesh          Analyst       2345154
+
+6 rows selected.
+
+SQL> select designaion from emp;
+select designaion from emp
+       *
+ERROR at line 1:
+ORA-00904: "DESIGNAION": invalid identifier
+
+
+SQL> select ename,eno,ph_no "Mobile number" from emp;
+
+ENAME                  ENO Mobile number
+--------------- ---------- -------------
+Sreenivas                1       4321421
+Eeshwar                  2       7890789
+Ganesh                   3       7890754
+Narendra                 4       7854754
+Arun                     5       2354754
+Mahesh                   6       2345154
+
+6 rows selected.
+
+SQL> spoof off;
+SP2-0042: unknown command "spoof off" - rest of line ignored.
+SQL> spool off;
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO
+---------- --------------- ---------- ----------
+         1 Sreenivas       Developer     4321421
+         2 Eeshwar         Developer     7890789
+         3 Ganesh          Analyst       7890754
+         4 Narendra        Designer      7854754
+         5 Arun            Tester        2354754
+         6 Mahesh          Analyst       2345154
+
+6 rows selected.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(15)
+ JOB                                                VARCHAR2(10)
+ PH_NO                                     NOT NULL NUMBER
+
+SQL> alter table emp
+  2  modify ph_no number unique not null;
+modify ph_no number unique not null
+       *
+ERROR at line 2:
+ORA-01442: column to be modified to NOT NULL is already NOT NULL
+
+
+SQL> alter table emp
+  2  modify ph_no number unique;
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER
+ ENAME                                              VARCHAR2(15)
+ JOB                                                VARCHAR2(10)
+ PH_NO                                     NOT NULL NUMBER
+
+SQL> alter table emp
+  2  modify location varchar2(10);
+modify location varchar2(10)
+       *
+ERROR at line 2:
+ORA-00904: "LOCATION": invalid identifier
+
+
+SQL> alter table emp
+  2  modify add location varchar2(10);
+modify add location varchar2(10)
+       *
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL> alter table emp
+  2  modify add column location varchar2(10);
+modify add column location varchar2(10)
+       *
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL> alter table emp
+  2  add location varchar2(10);
+
+Table altered.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION
+---------- --------------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421
+         2 Eeshwar         Developer     7890789
+         3 Ganesh          Analyst       7890754
+         4 Narendra        Designer      7854754
+         5 Arun            Tester        2354754
+         6 Mahesh          Analyst       2345154
+
+6 rows selected.
+
+SQL> update table emp
+  2  set location="Banglore" where eno="1";
+update table emp
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update emp
+  2  set location="Banglore" where eno="1";
+set location="Banglore" where eno="1"
+                                  *
+ERROR at line 2:
+ORA-00904: "1": invalid identifier
+
+
+SQL> update table emp
+  2  set location="Banglore" where eno=1 ;
+update table emp
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update emp
+  2  set [location="Banglore"] where eno = 1;
+set [location="Banglore"] where eno = 1
+    *
+ERROR at line 2:
+ORA-01747: invalid user.table.column, table.column, or column specification
+
+
+SQL> update emp
+  2  set location = Banglore
+  3  ;
+set location = Banglore
+               *
+ERROR at line 2:
+ORA-00904: "BANGLORE": invalid identifier
+
+
+SQL> update emp
+  2  set location = 'Banglore'
+  3  where eno = '1';
+
+1 row updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION
+---------- --------------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789
+         3 Ganesh          Analyst       7890754
+         4 Narendra        Designer      7854754
+         5 Arun            Tester        2354754
+         6 Mahesh          Analyst       2345154
+
+6 rows selected.
+
+SQL> update emp
+  2  set location='Hyderabad'
+  3  where eno = 3,4,6;
+where eno = 3,4,6
+             *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update emp
+  2  set location='Hyderabad'
+  3  where eno = '3','4','6';
+where eno = '3','4','6'
+               *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update emp
+  2  set location='Hyderabad'
+  3  where eno = '3,5,6';
+where eno = '3,5,6'
+            *
+ERROR at line 3:
+ORA-01722: invalid number
+
+
+SQL> update emp
+  2  set location='Hyderabad'
+  3  where eno = 3 & 4 & 5 ;
+Enter value for 4: 'Heyderabad'
+Enter value for 5: 'Hyderabad'
+old   3: where eno = 3 & 4 & 5
+new   3: where eno = 3 'Heyderabad' 'Hyderabad'
+where eno = 3 'Heyderabad' 'Hyderabad'
+              *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update emp
+  2  set location='Hyderabad'
+  3  where eno = 3 & 4 & 5 ;
+Enter value for 4: 'Hyderabad'
+Enter value for 5: 'Hyderabad';
+old   3: where eno = 3 & 4 & 5
+new   3: where eno = 3 'Hyderabad' 'Hyderabad';
+where eno = 3 'Hyderabad' 'Hyderabad';
+              *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION
+---------- --------------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789
+         3 Ganesh          Analyst       7890754
+         4 Narendra        Designer      7854754
+         5 Arun            Tester        2354754
+         6 Mahesh          Analyst       2345154
+
+6 rows selected.
+
+SQL> update emp
+  2  set location = 'Hyderabad'
+  3  where eno <='4' ;
+
+4 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION
+---------- --------------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Hyderabad
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754
+         6 Mahesh          Analyst       2345154
+
+6 rows selected.
+
+SQL> update emp
+  2  set location='Banglore'
+  3  where eno >='5' ;
+
+2 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION
+---------- --------------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Hyderabad
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+
+6 rows selected.
+
+SQL> update emp
+  2  set location = 'Banglore'
+  3  where eno = '1' ;
+
+1 row updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION
+---------- --------------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+
+6 rows selected.
+
+SQL> alter table emp
+  2  add dummy number;
+
+Table altered.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION        DUMMY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+
+6 rows selected.
+
+SQL> alter table emp
+  2  drop dummy;
+drop dummy
+     *
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> alter table emp
+  2  drop column dummy;
+
+Table altered.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION
+---------- --------------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+
+6 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table dept (dept_id number primary key,dname varchar2(10));
+
+Table created.
+
+SQL> desc dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID                                   NOT NULL NUMBER
+ DNAME                                              VARCHAR2(10)
+
+SQL> insert into emp values(432,'fdsafs');
+insert into emp values(432,'fdsafs')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into dept values(432,'fdsafs');
+
+1 row created.
+
+SQL> insert into dept values(442,'fdsafs');
+
+1 row created.
+
+SQL> insert into dept values(443,'fdsafs');
+
+1 row created.
+
+SQL> insert into dept values(453,'fdsafs');
+
+1 row created.
+
+SQL> select * from dept;
+
+   DEPT_ID DNAME
+---------- ----------
+       432 fdsafs
+       442 fdsafs
+       443 fdsafs
+       453 fdsafs
+
+SQL> delete table dept ;
+delete table dept
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> truncate table dept;
+
+Table truncated.
+
+SQL> select * from dept;
+
+no rows selected
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID                                   NOT NULL NUMBER
+ DNAME                                              VARCHAR2(10)
+
+SQL> drop dept;
+drop dept
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop table dept;
+
+Table dropped.
+
+SQL> desc dept;
+ERROR:
+ORA-04043: object dept does not exist
+
+
+SQL> desc dept3;
+ERROR:
+ORA-04043: object dept3 does not exist
+
+
+SQL> create table dept (d_id number,d_no number);
+
+Table created.
+
+SQL> insert into emp
+  2  values (432,432432)
+  3  ;
+insert into emp
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into dept values (432,4321);
+
+1 row created.
+
+SQL> insert into dept values (432,43221);
+
+1 row created.
+
+SQL> insert into dept values (432,43221);
+
+1 row created.
+
+SQL> insert into dept values (432,43221);
+
+1 row created.
+
+SQL> truncate dept;
+truncate dept
+            *
+ERROR at line 1:
+ORA-03290: Invalid truncate command - missing CLUSTER or TABLE keyword
+
+
+SQL> truncate table dept;
+
+Table truncated.
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ D_ID                                               NUMBER
+ D_NO                                               NUMBER
+
+SQL> insert into dept values (432,43221);
+
+1 row created.
+
+SQL> insert into dept values (432,43221);
+
+1 row created.
+
+SQL> insert into dept values (432,4321);
+
+1 row created.
+
+SQL> insert into dept values (432,43221);
+
+1 row created.
+
+SQL> select * from dept;
+
+      D_ID       D_NO
+---------- ----------
+       432      43221
+       432      43221
+       432       4321
+       432      43221
+
+SQL> drop dept;
+drop dept
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop dept;
+drop dept
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop table dept;
+
+Table dropped.
+
+SQL> create table dept (d_id number,d_no number);
+
+Table created.
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ D_ID                                               NUMBER
+ D_NO                                               NUMBER
+
+SQL> alter table dept
+  2  add phno number ;
+
+Table altered.
+
+SQL> desc  dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ D_ID                                               NUMBER
+ D_NO                                               NUMBER
+ PHNO                                               NUMBER
+
+SQL> alter table dept
+  2  modify phno varchar;
+modify phno varchar
+                  *
+ERROR at line 2:
+ORA-00906: missing left parenthesis
+
+
+SQL> alter table dept
+  2  modify phno varchar();
+modify phno varchar()
+                    *
+ERROR at line 2:
+ORA-00910: specified length too long for its datatype
+
+
+SQL> alter table dept
+  2  modify phno varchar(10);
+
+Table altered.
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ D_ID                                               NUMBER
+ D_NO                                               NUMBER
+ PHNO                                               VARCHAR2(10)
+
+SQL> select * from dept;
+
+no rows selected
+
+SQL> insert into dept values (432,43221);
+insert into dept values (432,43221)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into dept values (432,43221,'fdsa');
+
+1 row created.
+
+SQL> insert into dept values (432,43221,'fdsa');
+
+1 row created.
+
+SQL> insert into dept values (432,43221,'fdsa');
+
+1 row created.
+
+SQL> insert into dept values (432,43221,'fdsa');
+
+1 row created.
+
+SQL>
+SQL> insert into dept values (432,43221,'fdsa');
+
+1 row created.
+
+SQL> select * from dept ;
+
+      D_ID       D_NO PHNO
+---------- ---------- ----------
+       432      43221 fdsa
+       432      43221 fdsa
+       432      43221 fdsa
+       432      43221 fdsa
+       432      43221 fdsa
+
+SQL> selct distinct phno from dept;
+SP2-0734: unknown command beginning "selct dist..." - rest of line ignored.
+SQL> select distinct phno from dept;
+
+PHNO
+----------
+fdsa
+
+SQL> insert into dept values (431,43221,'fdsa');
+
+1 row created.
+
+SQL> select * from dept ;
+
+      D_ID       D_NO PHNO
+---------- ---------- ----------
+       432      43221 fdsa
+       432      43221 fdsa
+       432      43221 fdsa
+       432      43221 fdsa
+       432      43221 fdsa
+       431      43221 fdsa
+
+6 rows selected.
+
+SQL> select count(d_id) from dept;
+
+COUNT(D_ID)
+-----------
+          6
+
+SQL> commit;
+
+Commit complete.
+
+SQL>

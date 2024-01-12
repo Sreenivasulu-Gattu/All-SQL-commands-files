@@ -1,0 +1,473 @@
+
+SQL> select * from emp
+  2  ;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select * from emp order by sal;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+        14 Kasif      Clerk         8452548 Pune             4500
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        15 Harish     Tester        4324320 Banglore         5430
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+        12 Sirish     Analyst       8902254 Banglore         6500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         5 Arun       Tester        2354754 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+        13 Manish     Developer     8452254 Pune             7500
+        10 Subbu      Tester        5435454 Pune             8000
+         9 Babu       Developer     5435544 Pune             9000
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+
+15 rows selected.
+
+SQL> select distinct * from emp order by sal desc;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        13 Manish     Developer     8452254 Pune             7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         5 Arun       Tester        2354754 Banglore         7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+        12 Sirish     Analyst       8902254 Banglore         6500
+        15 Harish     Tester        4324320 Banglore         5430
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        14 Kasif      Clerk         8452548 Pune             4500
+
+15 rows selected.
+
+SQL> select * from emp where sal = (select distinct sal from emp);
+select * from emp where sal = (select distinct sal from emp)
+                               *
+ERROR at line 1:
+ORA-01427: single-row subquery returns more than one row
+
+
+SQL> select * from emp where sal in (select distinct sal from emp);
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select * from emp where rownum = 3;
+
+no rows selected
+
+SQL> select * from emp where rownum <= 3;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+
+SQL> select distinct * from emp where rownum < = 3;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+
+SQL> select sal from emp where order by sal desc ;
+select sal from emp where order by sal desc
+                          *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select distinct sal from emp order by sal ;
+
+       SAL
+----------
+      4500
+      5000
+      5430
+      6500
+      7500
+      8000
+      9000
+     10000
+
+8 rows selected.
+
+SQL> select distinct sal from emp order by sal desc;
+
+       SAL
+----------
+     10000
+      9000
+      8000
+      7500
+      6500
+      5430
+      5000
+      4500
+
+8 rows selected.
+
+SQL> select distinct sal from emp order by sal desc rownum <=3;
+select distinct sal from emp order by sal desc rownum <=3
+                                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select sal from (select distinct sal from emp order by sal desc ) where rownum < = 3;
+
+       SAL
+----------
+     10000
+      9000
+      8000
+
+SQL> select min(sal) from (select sal from (select distinct sal from emp order by sal desc ) where rownum < = 3) ;
+
+  MIN(SAL)
+----------
+      8000
+
+SQL> select * from emp where sal = ( select min(sal) from (select sal from (select distinct sal from emp order by sal desc ) where rownum < = 3)
+);
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+        10 Subbu      Tester        5435454 Pune             8000
+
+
+
+
+SQL> select * from emp where rownum <= 5
+  2  minus
+  3  select * from emp where rownum <= 4;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         5 Arun       Tester        2354754 Banglore         7500
+
+SQL> select * from emp where rownum <= 5
+  2  plus
+  3  select * from emp where rownum <= 5;
+plus
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp where rownum <= 5;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+
+SQL> select * from emp where rownum <= 5
+  2  intersection
+  3  select * from emp where rownum <= 3;
+intersection
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from (select rownum r,emp.* from emp) where r = 5;
+
+         R        ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+         5          5 Arun       Tester        2354754 Banglore         7500
+
+SQL> select rownum r,emp.* from emp;
+
+         R        ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+         1          1 Sreenivas  Developer     4321421 Banglore        10000
+         2          2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3          3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4          4 Narendra   Designer      7854754 Hyderabad        6500
+         5          5 Arun       Tester        2354754 Banglore         7500
+         6          6 Mahesh     Analyst       2345154 Banglore         7500
+         7          7 Siva       Tester        5432323 Hyderabad        7500
+         8          8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9          9 Babu       Developer     5435544 Pune             9000
+        10         10 Subbu      Tester        5435454 Pune             8000
+        11         11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12         12 Sirish     Analyst       8902254 Banglore         6500
+        13         13 Manish     Developer     8452254 Pune             7500
+        14         14 Kasif      Clerk         8452548 Pune             4500
+        15         15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select * from (select rownum r,emp.* from emp) where row in (1,3,4,8,9);
+select * from (select rownum r,emp.* from emp) where row in (1,3,4,8,9)
+                                                     *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from (select rownum r,emp.* from emp) where rownum in (1,3,4,8,9);
+
+         R        ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+         1          1 Sreenivas  Developer     4321421 Banglore        10000
+
+SQL> select * from (select rownum r,emp.* from emp) where rownum in (4,8,9);
+
+no rows selected
+
+SQL> select * from (select rownum r,emp.* from emp) where rownum in (9);
+
+no rows selected
+
+SQL> select * from emp ;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+         5 Arun       Tester        2354754 Banglore         7500
+         6 Mahesh     Analyst       2345154 Banglore         7500
+         7 Siva       Tester        5432323 Hyderabad        7500
+         8 Kalyan     Analyzer      5434323 Hyderabad        6500
+         9 Babu       Developer     5435544 Pune             9000
+        10 Subbu      Tester        5435454 Pune             8000
+        11 Hemanth    Clerk         5432254 Hyderabad        5000
+        12 Sirish     Analyst       8902254 Banglore         6500
+        13 Manish     Developer     8452254 Pune             7500
+        14 Kasif      Clerk         8452548 Pune             4500
+        15 Harish     Tester        4324320 Banglore         5430
+
+15 rows selected.
+
+SQL> select sal from (select distinct sal from emp order by sal desc) where rownum < = 3
+  2  minus
+  3  select sal from (select distinct sal from emp order by sal desc) where rownum < = 2;
+
+       SAL
+----------
+      8000
+
+SQL> select * from emp where sal = (select sal from (select distinct sal from emp order by sal desc) where rownum < = 3 minus  select sal from (select distinct sal from emp order by sal desc) where rownum < = 2);
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+        10 Subbu      Tester        5435454 Pune             8000
+
+SQL> select * from emp where rownum <=3;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+
+SQL> select * from emp where rownum = 4;
+
+no rows selected
+
+SQL> select * from emp where rownum <= 4;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+         3 Ganesh     Analyst       7890754 Hyderabad        7500
+         4 Narendra   Designer      7854754 Hyderabad        6500
+
+SQL> select max( rownum <=select * from emp where rownum <= 4));
+select max( rownum <=select * from emp where rownum <= 4))
+                   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select max(eno) from (select * from emp where rownum <= 4);
+
+  MAX(ENO)
+----------
+         4
+
+SQL> select * from emp where eno = (select max(eno) from (select * from emp where rownum <= 4));
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         4 Narendra   Designer      7854754 Hyderabad        6500
+
+SQL> select * from emp where eno = (select max(eno) from (select * from emp where rownum <= 5));
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         5 Arun       Tester        2354754 Banglore         7500
+
+SQL>
+SQL>
+SQL> /* Query to fetch all the employee details having the 3rd highest salary to the emp;
+SQL>
+SQL> select * from emp where sal = (select max(select sal from (select sal from emp order by sal desc) where rownum <=3)from emp);
+SQL> select * from emp where sal = (select max(select sal from (select sal from emp order by sal desc) where rownum <=3)from emp) from emp;
+SQL> select sal from emp order by sal desc;
+SQL> */
+SQL> select * from emp where sal = (select max(sal) from(select sal from (select sal from emp order by sal desc) where rownum <=3)) ;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+
+SQL> select sal from emp where order by sal desc;
+select sal from emp where order by sal desc
+                          *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select sal from emp order by sal desc;
+
+       SAL
+----------
+     10000
+     10000
+      9000
+      8000
+      7500
+      7500
+      7500
+      7500
+      7500
+      6500
+      6500
+      6500
+      5430
+      5000
+      4500
+
+15 rows selected.
+
+SQL> select * from emp where sal = (select max(sal) from(select sal from (select distinct sal from emp order by sal desc) where rownum <=3)) ;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         1 Sreenivas  Developer     4321421 Banglore        10000
+         2 Eeshwar    Developer     7890789 Hyderabad       10000
+
+SQL> select distinct sal from emp order by sal desc;
+
+       SAL
+----------
+     10000
+      9000
+      8000
+      7500
+      6500
+      5430
+      5000
+      4500
+
+8 rows selected.
+
+SQL> select sal from ( select distinct sal from emp order by sal desc) where rownum <= 3;
+
+       SAL
+----------
+     10000
+      9000
+      8000
+
+SQL> select max(sal) from (select sal from ( select distinct sal from emp order by sal desc) where rownum <= 3);
+
+  MAX(SAL)
+----------
+     10000
+
+SQL> select min(sal) from (select sal from ( select distinct sal from emp order by sal desc) where rownum <= 3);
+
+  MIN(SAL)
+----------
+      8000
+
+SQL> select * from emp where sal = (select min(sal) from (select sal from ( select distinct sal from emp order by sal desc) where rownum <= 3));
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+        10 Subbu      Tester        5435454 Pune             8000
+
+SQL> select * from emp where sal = (select min(sal) from(select sal from (select sal from emp order by sal desc) where rownum <=3)) ;
+
+       ENO ENAME      JOB             PH_NO LOCATION          SAL
+---------- ---------- ---------- ---------- ---------- ----------
+         9 Babu       Developer     5435544 Pune             9000
+
+SQL> select min(select sal from emp where sal between 6000 and 9000) from emp;
+select min(select sal from emp where sal between 6000 and 9000) from emp
+           *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select sal from emp where sal between 6000 and 9000 ;
+
+       SAL
+----------
+      7500
+      6500
+      7500
+      7500
+      7500
+      6500
+      9000
+      8000
+      6500
+      7500
+
+10 rows selected.

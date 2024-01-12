@@ -1,0 +1,384 @@
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri Jun 9 14:44:03 2023
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+Last Successful login time: Thu Jun 08 2023 11:38:11 +05:30
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore
+         2 Eeshwar         Developer     7890789 Hyderabad
+         3 Ganesh          Analyst       7890754 Hyderabad
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore
+         7 Siva            Tester        5432323 Hyderabad
+         8 Kalyan          Analyzer      5434323 Hyderabad
+
+8 rows selected.
+
+SQL> update table emp
+  2  set salary = 10000 where job='Developer';
+update table emp
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update table emp
+  2  set salary = 10000 where job='Developer';
+update table emp
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update emp
+  2  set salary = 10000 where job='Developer';
+
+2 rows updated.
+
+SQL> update emp
+  2  set salary=8000 where job = 'Analyst';
+
+2 rows updated.
+
+SQL> update emp
+  2  set job = 'Analyst' where eno=8;
+
+1 row updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad
+         8 Kalyan          Analyst       5434323 Hyderabad
+
+8 rows selected.
+
+SQL> update emp
+  2  set salary=8000 where job = 'Analyst';
+
+3 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad
+         5 Arun            Tester        2354754 Banglore
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+
+8 rows selected.
+
+SQL> update emp
+  2  set salary = 6000 where job='Designer';
+
+1 row updated.
+
+SQL> update emp
+  2  set salary = 7500 where job='Tester';
+
+2 rows updated.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad        6000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+
+8 rows selected.
+
+SQL> select * from emp
+  2  where job = ('Developer' or 'Analyst') and (salary = 10000 or salary=8000);
+where job = ('Developer' or 'Analyst') and (salary = 10000 or salary=8000)
+                         *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> select * from emp
+  2  where (job = 'Developer' or job = 'Analyst') and (salary = 10000 or salary=8000);
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+
+SQL> select * from emp
+  2  where (job = 'Developer' or job = 'Analyst') and (salary = 10000 and salary=8000);
+
+no rows selected
+
+SQL> select * from emp
+  2  where (job = 'Developer' and job = 'Analyst') and (salary = 10000 or salary=8000);
+
+no rows selected
+
+SQL> select * from emp
+  2  where (job = 'Developer' and job = 'Analyst') and not salary = 10000;;
+where (job = 'Developer' and job = 'Analyst') and not salary = 10000;
+                                                                    *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp
+  2  where (job = 'Developer' and job = 'Analyst') and not salary = 10000;
+
+no rows selected
+
+SQL> select * from emp
+  2  where (job = 'Developer' or job = 'Analyst') and not salary = 10000;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad        6000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+
+8 rows selected.
+
+SQL> insert into emp values(9,'Ismail','Tester',5435325,'Banglore',6500);
+
+1 row created.
+
+SQL> insert into emp values(10,'Kaif','Designer',5435095,'Hyderabad',5500);
+
+1 row created.
+
+SQL> insert into emp values(11,'Babu','Analyst',5435066,'Pune',7500);
+
+1 row created.
+
+SQL> insert into emp values(12,'Sreenadh','Developer',5435776,'Pune',6500);
+
+1 row created.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad        6000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+         9 Ismail          Tester        5435325 Banglore         6500
+        10 Kaif            Designer      5435095 Hyderabad        5500
+        11 Babu            Analyst       5435066 Pune             7500
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+        12 Sreenadh        Developer     5435776 Pune             6500
+
+12 rows selected.
+
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad        6000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+         9 Ismail          Tester        5435325 Banglore         6500
+        10 Kaif            Designer      5435095 Hyderabad        5500
+        11 Babu            Analyst       5435066 Pune             7500
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+        12 Sreenadh        Developer     5435776 Pune             6500
+
+12 rows selected.
+
+SQL> set pages 454 lines 767;
+SQL> select * from emp;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad        6000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+         9 Ismail          Tester        5435325 Banglore         6500
+        10 Kaif            Designer      5435095 Hyderabad        5500
+        11 Babu            Analyst       5435066 Pune             7500
+        12 Sreenadh        Developer     5435776 Pune             6500
+
+12 rows selected.
+
+SQL>    select * from emp
+  2  where salary = 7500 and eno between 1 and 8;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         5 Arun            Tester        2354754 Banglore         7500
+         7 Siva            Tester        5432323 Hyderabad        7500
+
+SQL> select * from emp
+  2  where not location = pune and salary between 8000 and 6000;
+where not location = pune and salary between 8000 and 6000
+                     *
+ERROR at line 2:
+ORA-00904: "PUNE": invalid identifier
+
+
+SQL> select * from emp
+  2  where not location = 'pune' and salary between 8000 and 6000;
+
+no rows selected
+
+SQL> select * from emp
+  2  where (not location = 'pune') and salary between 8000 and 6000;
+
+no rows selected
+
+SQL> select * from emp
+  2  where (not location = 'pune') and (salary between 8000 and 6000);
+
+no rows selected
+
+SQL> select * from emp
+  2  where (not location = 'Pune') and (salary between 8000 and 6000);
+
+no rows selected
+
+SQL> select * from emp
+  2  where (not location = 'Pune') and (salary >=6000);
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad        6000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+         9 Ismail          Tester        5435325 Banglore         6500
+
+9 rows selected.
+
+SQL> select * from emp
+  2  where (not location = 'Pune') and ( location = 'Banglore');
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         9 Ismail          Tester        5435325 Banglore         6500
+
+SQL> select * from emp
+  2  where job = 'Tester' and location = 'Hyderabad' ;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         7 Siva            Tester        5432323 Hyderabad        7500
+
+SQL> select * from emp
+  2  where job = 'Tester' or location = 'Hyderabad' ;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         2 Eeshwar         Developer     7890789 Hyderabad       10000
+         3 Ganesh          Analyst       7890754 Hyderabad        8000
+         4 Narendra        Designer      7854754 Hyderabad        6000
+         5 Arun            Tester        2354754 Banglore         7500
+         7 Siva            Tester        5432323 Hyderabad        7500
+         8 Kalyan          Analyst       5434323 Hyderabad        8000
+         9 Ismail          Tester        5435325 Banglore         6500
+        10 Kaif            Designer      5435095 Hyderabad        5500
+
+8 rows selected.
+
+SQL> select * from emp
+  2  where job = 'Tester' not location = 'Hyderabad' ;
+where job = 'Tester' not location = 'Hyderabad'
+                     *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from emp
+  2  where job = 'Tester' and not location = 'Hyderabad' ;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         5 Arun            Tester        2354754 Banglore         7500
+         9 Ismail          Tester        5435325 Banglore         6500
+
+SQL> select * from emp
+  2  where job = 'Tester' or not location = 'Hyderabad' ;
+
+       ENO ENAME           JOB             PH_NO LOCATION       SALARY
+---------- --------------- ---------- ---------- ---------- ----------
+         1 Sreenivas       Developer     4321421 Banglore        10000
+         5 Arun            Tester        2354754 Banglore         7500
+         6 Mahesh          Analyst       2345154 Banglore         8000
+         7 Siva            Tester        5432323 Hyderabad        7500
+         9 Ismail          Tester        5435325 Banglore         6500
+        11 Babu            Analyst       5435066 Pune             7500
+        12 Sreenadh        Developer     5435776 Pune             6500
+
+7 rows selected.
+
+SQL>
